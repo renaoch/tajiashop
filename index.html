@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=yes">
     <title>Taija Shop - Premium Paan & Tobacco</title>
     
     <!-- Optimized Font Awesome Loading -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
     <!-- Header -->
@@ -21,9 +21,21 @@
                     <i class="fas fa-store"></i>
                     <h1>Taija Shop</h1>
                 </div>
+                
+                <!-- Mobile menu button -->
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
                 <div class="contact-info">
-                    <span><i class="fas fa-phone"></i> +91 98765 43210</span>
-                    <span><i class="fas fa-clock"></i> Open 7 AM - 11 PM</span>
+                    <a href="tel:+919876543210" class="contact-item">
+                        <i class="fas fa-phone"></i> +91 98765 43210
+                    </a>
+                    <span class="contact-item">
+                        <i class="fas fa-clock"></i> Open 7 AM - 11 PM
+                    </span>
                 </div>
             </div>
         </div>
@@ -83,13 +95,18 @@
                     </div>
                 </div>
 
-        <div class="hero-image">
-    <div class="storefront-image">
-        <img src="./shop-front.jpeg" 
-             alt="Pan Shop Storefront" 
-             class="shop-front-photo"
-             
-    </div>
+                <div class="hero-image">
+                    <div class="storefront-image">
+                        <img src="./shop-front.jpeg" 
+                             alt="Pan Shop Storefront" 
+                             class="shop-front-photo"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder-content" style="display: none;">
+                            <i class="fas fa-store"></i>
+                            <span>Shop Front View</span>
+                            <small>Image will appear here</small>
+                        </div>
+                    </div>
                     <div class="floating-stats">
                         <div class="floating-stat">
                             <span class="stat-number">15+</span>
@@ -232,14 +249,20 @@
                         </div>
                         <div>
                             <h4>Contact Details</h4>
-                            <p>Phone: +91 98765 43210<br>WhatsApp: +91 98765 43210</p>
+                            <p>Phone: <a href="tel:+919876543210">+91 98765 43210</a><br>WhatsApp: <a href="https://wa.me/919876543210">+91 98765 43210</a></p>
                         </div>
                     </div>
                 </div>
-          <div class="map-container">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d238.6137864324168!2d93.01576947816174!3d25.171381986266347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1754281116409!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
-
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d238.6137864324168!2d93.01576947816174!3d25.171381986266347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1754281116409!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; border-radius: 20px;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
             </div>
         </div>
     </section>
@@ -252,9 +275,9 @@
                     <h3>Taija Pan Shop</h3>
                     <p>Your trusted neighborhood pan shop serving quality products with a smile for over 15 years.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/919876543210" class="social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -284,7 +307,56 @@
         </div>
     </footer>
 
-    <!-- Optimized JavaScript Loading -->
-    <script src="js/script.js" defer></script>
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const contactInfo = document.querySelector('.contact-info');
+            
+            if (mobileMenuBtn && contactInfo) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    contactInfo.classList.toggle('active');
+                    this.classList.toggle('active');
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (contactInfo.classList.contains('active')) {
+                            contactInfo.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                        }
+                    }
+                });
+            });
+            
+            // Enhanced touch interactions for mobile
+            if ('ontouchstart' in window) {
+                document.body.classList.add('touch-device');
+            }
+            
+            // Product card interactions
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove active class from all cards
+                    productCards.forEach(c => c.classList.remove('active'));
+                    // Add active class to clicked card
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
